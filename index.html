@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8"> <!--UTF-8を指定しておく-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>架空カクテルクリエイター</title>
+    <!--CSS-->
+    <style>
+        body { font-family: "MS 明朝", serif; display: flex; justify-content: center; background-color: #f0f0f0; }
+        .container { width: 90%; max-width: 800px; background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1, h2 { text-align: center; }
+        .section { margin-bottom: 20px; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
+        #ingredients-area button { margin: 5px; padding: 10px; font-size: 16px; cursor: pointer; border-radius: 5px; border: 1px solid #ccc; background-color: #fafafa; }
+        #result-display { display: flex; align-items: center; justify-content: space-around; }
+        #result-glass { width: 100px; height: 150px; border: 3px solid #333; border-top: none; background-color: #ffffff; transition: background-color 0.5s; position: relative; }
+        #result-glass::before { content: ''; position: absolute; bottom: -10px; left: 25px; width: 50px; height: 10px; background-color: #333; } /* 脚 */
+        #result-glass::after { content: ''; position: absolute; bottom: -20px; left: 10px; width: 80px; height: 10px; background-color: #333; border-radius: 2px; } /* 台 */
+        #result-info ul { list-style: none; padding: 0; }
+        .buttons-area { text-align: center; }
+        .buttons-area button { padding: 10px 20px; font-size: 18px; cursor: pointer; margin: 0 10px; }
+        .shake {
+            animation : shake-animation 0.5s;
+        }
+        @keyframes shake-animation{
+            0% { transform: translate(0, 0); }
+            10% { transform: translate(-5px, -5px); }
+            20% { transform: translate(5px, 5px); }
+            30% { transform: translate(-5px, 5px); }
+            40% { transform: translate(5px, -5px); }
+            50% { transform: translate(-5px, -5px); }
+            60% { transform: translate(5px, 5px); }
+            70% { transform: translate(-5px, 5px); }
+            80% { transform: translate(5px, -5px); }
+            100% { transform: translate(0, 0); }
+        }
+    </style>
+    <script src="main.js" defer></script>
+<body>
+
+    <div class="container">
+        <!--タイトル部分-->
+        <h1>架空カクテルクリエイター</h1>
+
+
+        <!--材料選択部分-->
+            <!-- 材料は main.jsで処理されて表示されるため最初は空-->
+            <!-- 以降の空のタグも同様-->
+        <div class="section">
+            <h2>1. 材料を選ぶ（4つまで）</h2>
+            <div id="ingredients-area">
+                </div>
+        </div>
+        <div class="section">
+            <h3>選択中の材料</h3>
+            <ul id="selected-list">
+                </ul>
+        </div>
+
+
+        <!--シェイク用のボタンリセット用のボタン部分-->
+        <div class="buttons-area">
+            <button id="shake-button">シェイク！</button>
+            <button id="reset-button">リセット</button>
+        </div>
+
+        
+        <!--カクテルを表示する部分-->
+        <div class="section">
+            <h2>完成したカクテル</h2>
+            <div id="result-display" class="section"> 
+                <h2>完成したカクテル</h2>
+                <div id="result-cocktail-area"> <div id="result-glass"></div>
+                    <div id="result-info">
+                        <h3 id="result-name">どんなカクテルができるかな？</h3>
+                        <ul id="result-params"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--ユーザの傾向分析-->
+        <div class="section" id="analysis-area">
+            <h2>あなたの好み分析</h2>
+            <p id="analysis-result">カクテルを3つ以上作ると、あなたの作るカクテルの傾向が分析されます</p>
+        </div>
+
+        <!--作成履歴の部分-->
+        <div class="section" id="history-area">
+            <h2>作成履歴</h2>
+            <ul id="history-list"></ul>
+        </div>
+    </div>
+
+
+    <div id="tutorial-modal" style="display: none;">
+        <div id="tutorial-content">
+            <h2>ようこそ！架空カクテルクリエイターへ</h2>
+            <p>このアプリの遊び方をご説明します。</p>
+            <ol>
+                <li><strong>材料を選ぶ:</strong> 気になる材料を4つまでクリックして選びましょう。</li>
+                <li><strong>シェイク！:</strong> ボタンを押すと、あなただけのオリジナルカクテルが完成します。</li>
+                <li><strong>レシピ発見:</strong> 特定の組み合わせを選ぶと、有名なカクテルが完成することも…？</li>
+                <li><strong>記録と分析:</strong> 作ったカクテルは履歴に記録され、3つ以上作るとあなたの好みが分析されます。</li>
+            </ol>
+            <button id="tutorial-close-btn">さあ、始めよう！</button>
+        </div>
+    </div>
+    <script src="main.js" defer></script>
+
+</body>
+</html>
